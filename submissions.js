@@ -4,14 +4,15 @@
 //
 // Please ensure that your bot's evaluation function:
 //
-// 1. consistently executes in under 1000ms, otherwise it will be eliminated!
-//      Remember that the size of the playfield will increase as the player count increases, and
-//      that other people's computers may be slower than yours.
+// 1. executes reasonably fast. There is a hard limit of 1000ms per call, but please
+//      try to keep it much lower than that if possible. Remember that the size of the playfield
+//      increases as the player count increases, and that other people's computers
+//      may be slower than yours
 //
 // 2. is 100% deterministic (i.e. will always return the same output given the same input state)
-//      However, carrying state across executions (e.g. for caching) is permitted;
-//      If you choose to do this, ensure that the function is still 100% deterministic, and
-//      enclose all variables in an IIFE
+//      However, carrying state across executions (e.g. for caching) is permitted.
+//      If you choose to do this, ensure that the function is still 100% deterministic;
+//      you may enclose variables in an IIFE
 //
 // 3. does not attempt to tamper with the judging system, modify global variables,
 //      or anything else illegal
