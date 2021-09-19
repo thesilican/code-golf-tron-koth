@@ -102,6 +102,21 @@ class Round {
         // Map to create a cloned array (to prevent bot function from modifying)
         return this.heads[botIdx].map((x) => x);
       },
+      getBoard: () => {
+        const board = [];
+        for (let i = 0; i < this.board.length; i++) {
+          const col = [];
+          for (let j = 0; j < this.board[0].length; j++) {
+            if (this.heads.find(([x, y]) => x === i && y === j)) {
+              col.push("@");
+            } else {
+              col.push(this.board[i][j]);
+            }
+          }
+          board.push(col);
+        }
+        return board;
+      },
       get: (x, y) => {
         if (!Number.isInteger(x) || !Number.isInteger(y)) {
           throw new Error("Expected x and y to be integers");
