@@ -38,7 +38,9 @@ window.addEventListener("load", async () => {
     console.log(`Completing tournament round ${round}...`);
     tournament.doRound();
     // raf allows time for the UI to refresh
-    await new Promise((res) => requestAnimationFrame(res));
+    for (let i = 0; i < 10; i++) {
+      await new Promise((res) => requestAnimationFrame(res));
+    }
   }
   console.log("Completed all tournament rounds");
 
