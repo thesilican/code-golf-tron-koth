@@ -12,6 +12,7 @@ const $turnPrev = document.getElementById("turn-prev");
 const $turnPlay = document.getElementById("turn-play");
 const $turnNext = document.getElementById("turn-next");
 const $turnEnd = document.getElementById("turn-end");
+const $progress = document.getElementById("progress");
 const $playfield = document.getElementById("playfield");
 
 // Variables to control the state of the UI
@@ -28,6 +29,8 @@ function renderState() {
   $playfield.innerText = frame;
   $roundNum.innerText = roundNum + 1;
   $turnPlay.innerText = interval === null ? "Play" : "Pause";
+  $progress.max = round.frames.length - 1;
+  $progress.value = turnNum;
 }
 
 // Complete tournament simulation on window load
@@ -97,6 +100,10 @@ $turnNext.addEventListener("click", () => {
 });
 $turnPrev.addEventListener("click", () => {
   turnNum = Math.max(turnNum - 1, 0);
+  renderState();
+});
+$progress.addEventListener("input", (e) => {
+  turnNum = Number(e.target.value);
   renderState();
 });
 
