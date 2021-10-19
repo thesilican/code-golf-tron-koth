@@ -289,7 +289,9 @@ class Tournament {
   }
 
   // Complete one round of the tournament
-  doRound() {
+  // Is a generator function so that execution can be started/stopped
+  // between turns to allow UI to update
+  *doRound() {
     if (this.finished()) {
       throw new Error("Tournament cannot do round if already finished");
     }
@@ -310,6 +312,7 @@ class Tournament {
     const round = new Round(roundBots);
     while (!round.finished()) {
       round.doTurn();
+      yield round.turnNum;
     }
     this.rounds.push(round);
     this.eliminated.push(...round.eliminated.map((x) => roundMapping.get(x)));

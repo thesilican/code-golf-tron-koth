@@ -33,15 +33,23 @@ function renderState() {
 // Complete tournament simulation on window load
 window.addEventListener("load", async () => {
   tournament = new Tournament(SUBMISSIONS);
-  for (let round = 1; !tournament.finished(); round++) {
-    $loading.innerText = `Running tournament... (round ${round})`;
+  let round = 1;
+  let turn = 0;
+  // Interval to update UI
+  const interval = setInterval(() => {
+    $loading.innerText = `Running tournament... (round ${round} turn ${turn})`;
+  }, 100);
+  while (!tournament.finished()) {
     console.log(`Completing tournament round ${round}...`);
-    tournament.doRound();
-    // raf allows time for the UI to refresh
-    for (let i = 0; i < 10; i++) {
-      await new Promise((res) => requestAnimationFrame(res));
+    for (turn of tournament.doRound()) {
+      // Yield execution every 20 rounds so that UI can update
+      if (turn % 20 === 0) {
+        await new Promise((res) => setTimeout(res));
+      }
     }
+    round++;
   }
+  clearInterval(interval);
   console.log("Completed all tournament rounds");
 
   // Add elements to leaderboard
