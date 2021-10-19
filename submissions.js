@@ -136,4 +136,51 @@ const SUBMISSIONS = [
     }
     return possible[0];
   }),
+  new Bot("Dodge West", "Imanton1", (state) => {
+    const [x, y] = state.getSelf();
+
+    if (
+      state.get(x - 1, y) === " " &&
+      !(
+        state.get(x - 2, y + 0) === "@" ||
+        state.get(x - 1, y + 1) === "@" ||
+        state.get(x - 1, y - 1) === "@"
+      )
+    )
+      return "W";
+    if (
+      state.get(x, y + 1) === " " &&
+      !(
+        state.get(x + 0, y + 2) === "@" ||
+        state.get(x + 1, y + 1) === "@" ||
+        state.get(x - 1, y + 1) === "@"
+      )
+    )
+      return "N";
+    if (
+      state.get(x, y - 1) === " " &&
+      !(
+        state.get(x + 0, y - 2) === "@" ||
+        state.get(x + 1, y - 1) === "@" ||
+        state.get(x - 1, y - 1) === "@"
+      )
+    )
+      return "S";
+    if (
+      state.get(x + 1, y) === " " &&
+      !(
+        state.get(x + 2, y + 0) === "@" ||
+        state.get(x + 1, y + 1) === "@" ||
+        state.get(x + 1, y - 1) === "@"
+      )
+    )
+      return "E";
+
+    if (state.get(x - 1, y) === " ") return "W";
+    if (state.get(x, y + 1) === " ") return "N";
+    if (state.get(x, y - 1) === " ") return "S";
+    if (state.get(x + 1, y) === " ") return "E";
+
+    return "N";
+  }),
 ];
