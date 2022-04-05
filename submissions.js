@@ -183,4 +183,78 @@ const SUBMISSIONS = [
 
     return "N";
   }),
+  new Bot("Player Avoid", "Agent Biscutt", (state) => {
+    const [x, y] = state.getSelf();
+    if (
+      state.get(x + 1, y) === " " &&
+      (state.get(x + 1, y + 1) === " " || state.get(x + 1, y - 1) === " ") &&
+      state.get(x + 1, y + 1) != "@" &&
+      state.get(x + 1, y - 1) != "@" &&
+      ((state.get(x - 1, y + 1) != "@" && state.get(x - 1, y - 1) != "@") ||
+        state.get(x + 2, y) == "#") &&
+      state.get(x + 2, y + 2) != "@" &&
+      state.get(x + 2, y - 2) != "@" &&
+      state.get(x - 2, y + 2) != "@" &&
+      state.get(x - 2, y - 2) != "@" &&
+      state.get(x + 2, y + 2) != "@" &&
+      state.get(x + 2, y - 1) != "@" &&
+      state.get(x - 2, y + 2) != "@" &&
+      state.get(x - 2, y - 1) != "@" &&
+      state.get(x + 2, y) != "@"
+    ) {
+      return "E";
+    } else if (
+      state.get(x - 1, y) === " " &&
+      (state.get(x - 1, y + 1) === " " || state.get(x - 1, y - 1) === " ") &&
+      state.get(x - 1, y + 1) != "@" &&
+      state.get(x - 1, y - 1) != "@" &&
+      ((state.get(x + 1, y + 1) != "@" && state.get(x + 1, y - 1) != "@") ||
+        state.get(x + 2, y) == "#") &&
+      state.get(x + 2, y + 2) != "@" &&
+      state.get(x + 2, y - 2) != "@" &&
+      state.get(x - 2, y + 2) != "@" &&
+      state.get(x - 2, y - 2) != "@" &&
+      state.get(x + 2, y + 2) != "@" &&
+      state.get(x + 2, y - 1) != "@" &&
+      state.get(x - 2, y + 2) != "@" &&
+      state.get(x - 2, y - 1) != "@" &&
+      state.get(x - 2, y) != "@"
+    ) {
+      return "W";
+    } else if (
+      state.get(x, y + 1) === " " &&
+      state.get(x + 1, y + 1) != "@" &&
+      state.get(x - 1, y + 1) != "@" &&
+      state.get(x, y + 2) != "@"
+    ) {
+      return "N";
+    } else if (
+      state.get(x, y - 1) === " " &&
+      state.get(x + 1, y - 1) != "@" &&
+      state.get(x - 1, y - 1) != "@" &&
+      state.get(x, y + 2) != "@"
+    ) {
+      return "S";
+    }
+
+    if (state.get(x, y + 1) === " " && state.get(x, y + 2) != "@") {
+      return "N";
+    } else if (state.get(x + 1, y) === " " && state.get(x + 2, y) != "@") {
+      return "E";
+    } else if (state.get(x, y - 1) === " " && state.get(x, y - 2) != "@") {
+      return "S";
+    } else if (state.get(x - 1, y) === " " && state.get(x - 2, y) != "@") {
+      return "W";
+    }
+    if (state.get(x, y + 1) === " ") {
+      return "N";
+    } else if (state.get(x + 1, y) === " ") {
+      return "E";
+    } else if (state.get(x, y - 1) === " ") {
+      return "S";
+    } else if (state.get(x - 1, y) === " ") {
+      return "W";
+    }
+    return "S";
+  }),
 ];
